@@ -2,7 +2,7 @@ name: GitHubActions CI tests
 
 on:
   push:
-    branches: [master, dev, ci]
+    branches: [master, dev, ci, plugin]
   pull_request:
 
 jobs:
