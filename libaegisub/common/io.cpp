@@ -42,6 +42,18 @@ std::unique_ptr<std::istream> Open(fs::path const& file, bool binary) {
 	return std::unique_ptr<std::istream>(stream.release());
 }
 
+std::shared_ptr<std::iostream> Open_IO(fs::path const& file) {
+    LOG_D("agi/io/open/file") << file;
+
+    auto stream = std::make_shared<boost::filesystem::fstream>(file, std::ios::binary | std::ios::out | std::ios::in);
+    if (stream->fail()) {
+        acs::CheckFileRead(file);
+        throw IOFatal("Unknown fatal error occurred opening " + file.string());
+    }
+
+    return std::shared_ptr<std::iostream>(stream);
+}
+
 Save::Save(fs::path const& file, bool binary)
 : file_name(file)
 , tmp_name(unique_path(file.parent_path()/(file.stem().string() + "_tmp_%%%%" + file.extension().string())))

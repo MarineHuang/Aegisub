@@ -13,7 +13,7 @@
 // OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 //
 // Aegisub Project http://www.aegisub.org/
-
+#pragma once
 #include <libaegisub/exception.h>
 #include <libaegisub/fs_fwd.h>
 

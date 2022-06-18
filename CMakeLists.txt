@@ -10,7 +10,7 @@ list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 # on the command line.  Without this, cmake defaults to an unoptimized,
 # non-debug build, which almost nobody wants.
 if(NOT CMAKE_BUILD_TYPE)
-    set(CMAKE_BUILD_TYPE Release)
+    set(CMAKE_BUILD_TYPE Debug)
 endif()
 
 ## Build bundled LuaJIT with aegisub specific patches
@@ -325,7 +325,19 @@ add_custom_command(
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/src/bitmaps
 )
 
+set(PROJECT_SOURCES "" 
+        CACHE FILEPATH "source files for top project" FORCE
+) 
+set(PROJECT_LIBS "" 
+    CACHE STRING "libraries for top project" FORCE
+)
+set(PROJECT_INCLUDE "" 
+    CACHE PATH "include directory for top project" FORCE
+)
+
+add_subdirectory("src")
 add_subdirectory("vendor/csri")
+message("PROJECT_SOURCES: ${PROJECT_SOURCES}")
 
 ## Aegisub
 add_executable(Aegisub WIN32
@@ -347,6 +359,7 @@ add_executable(Aegisub WIN32
     src/command/tool.cpp
     src/command/video.cpp
     src/command/vis_tool.cpp
+    src/command/network.cpp
     "${CMAKE_CURRENT_BINARY_DIR}/src/libresrc/bitmap.cpp"
     "${CMAKE_CURRENT_BINARY_DIR}/src/libresrc/default_config.cpp"
     src/libresrc/libresrc.cpp
@@ -495,10 +508,19 @@ add_executable(Aegisub WIN32
     src/video_provider_yuv4mpeg.cpp
     src/video_slider.cpp
     src/visual_feature.cpp
+    ${PROJECT_SOURCES}
 )
-target_link_libraries(Aegisub PRIVATE ${CMAKE_DL_LIBS} libaegisub luajit)
+message("PROJECT_LIBS: ${PROJECT_LIBS}")
+target_link_libraries(Aegisub 
+    PRIVATE ${CMAKE_DL_LIBS}
+    PRIVATE ${PROJECT_LIBS} 
+    PRIVATE libaegisub luajit)
 target_compile_definitions(Aegisub PRIVATE CMAKE_BUILD)
-target_include_directories(Aegisub PRIVATE "src/libresrc" "${CMAKE_CURRENT_BINARY_DIR}/src/libresrc")
+message("PROJECT_INCLUDE: ${PROJECT_INCLUDE}")
+target_include_directories(Aegisub 
+    PRIVATE "src/libresrc" 
+    PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/src/libresrc"
+    PRIVATE ${PROJECT_INCLUDE})
 if(APPLE)
     # CMake on macOS currently does not support pch with objc, so use the old way
     target_compile_options(Aegisub PRIVATE -include "${PROJECT_SOURCE_DIR}/src/agi_pre.h")

@@ -75,6 +75,7 @@ namespace cmd {
 	void init_tool();
 	void init_video();
 	void init_visual_tools();
+	void init_network();
 
 	void init_builtin_commands() {
 		LOG_D("command/init") << "Populating command map";
@@ -92,6 +93,7 @@ namespace cmd {
 		init_tool();
 		init_video();
 		init_visual_tools();
+		init_network();
 	}
 
 	void clear() {

@@ -619,5 +619,23 @@
 			"Show Keyframes" : true
 		},
 		"Subtitle Sync" : true
+	},
+	"Speech Recognizer": {
+		"Engine List" : [
+			{"string": "Ali Chinese"},
+			{"string": "Ali English"}
+		],
+		"Ali Chinese" : {	
+			"API" : "ali" ,
+			"Access Key Id" : "",
+			"Access Key Secret" : "",
+			"App Key" : ""
+		},
+		"Ali English" : {
+			"API" : "ali" ,
+			"Access Key Id" : "",
+			"Access Key Secret" : "",
+			"App Key" : ""
+		}
 	}
 }

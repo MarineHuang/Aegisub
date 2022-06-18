@@ -15,7 +15,7 @@
 /// @file io.h
 /// @brief Public interface for IO methods.
 /// @ingroup libaegisub
-
+#pragma once
 #include <libaegisub/exception.h>
 #include <libaegisub/fs_fwd.h>
 
@@ -30,6 +30,7 @@ DEFINE_EXCEPTION(IOError, Exception);
 DEFINE_EXCEPTION(IOFatal, IOError);
 
 std::unique_ptr<std::istream> Open(fs::path const& file, bool binary = false);
+std::shared_ptr<std::iostream> Open_IO(fs::path const& file);
 
 class Save {
 	std::unique_ptr<std::ostream> fp;
