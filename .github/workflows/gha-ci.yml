@@ -141,13 +141,17 @@ jobs:
     - name: install deps
       run: |
         Invoke-WebRequest -Uri https://github.com/FFMS/ffms2/releases/download/2.23/ffms2-2.23.1-msvc.7z -OutFile vendor/ffms2-2.23.1-msvc.7z
-
         7z.exe x vendor/ffms2-2.23.1-msvc.7z -ovendor/ffms2
 
         Set-Content -Value "" -Path "C:\vcpkg\vcpkg.disable-metrics" -Force
         ## Fix vcpkg wxwidgets fail when building without debug
         #(Get-Content "C:\vcpkg\ports\wxwidgets\vcpkg-cmake-wrapper.cmake") -replace '    _find_package', '    #_find_package' | Set-Content "C:\vcpkg\ports\wxwidgets\vcpkg-cmake-wrapper.cmake"
+        
         vcpkg.exe install --triplet x64-windows avisynthplus boost-asio boost-container boost-crc boost-filesystem boost-flyweight boost-gil boost-interprocess 'boost-locale[icu]' 'boost-regex[icu]' boost-scope-exit boost-thread fftw3 hunspell icu libass libiconv uchardet wxwidgets xaudio2redist gtest ffmpeg curl openssl
+        
+        # CMake has not FindFFMPEG module
+        Copy-Item -Path C:\vcpkg\installed\x64-windows\share\ffmpeg\FindFFMPEG.cmake -Destination "C:\Program Files\CMake\share\cmake-3.23\Modules"
+
 
     - name: configure
       run: |
