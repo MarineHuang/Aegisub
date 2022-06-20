@@ -2,3 +2,7 @@
 	path = vendor/googletest
 	url = https://github.com/svn2github/googletest.git
 	ignore = dirty
+[submodule "vendor/aliyun-oss-cpp-sdk"]
+	path = vendor/aliyun-oss-cpp-sdk
+	url = git@github.com:aliyun/aliyun-oss-cpp-sdk.git
+	branch = master

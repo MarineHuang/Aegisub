@@ -10,8 +10,10 @@ list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 # on the command line.  Without this, cmake defaults to an unoptimized,
 # non-debug build, which almost nobody wants.
 if(NOT CMAKE_BUILD_TYPE)
-    set(CMAKE_BUILD_TYPE Debug)
+    set(CMAKE_BUILD_TYPE Release)
 endif()
+
+add_subdirectory(vendor/aliyun-oss-cpp-sdk)
 
 ## Build bundled LuaJIT with aegisub specific patches
 add_executable(luajit-minilua vendor/luajit/src/host/minilua.c)
