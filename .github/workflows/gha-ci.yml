@@ -135,8 +135,8 @@ jobs:
       uses: pat-s/always-upload-cache@v2
       with:
         path: C:\Users\runneradmin\AppData\Local\vcpkg\archives
-        key: vcpkg-archives-${{ github.run_id }}
-        restore-keys: vcpkg-archives-
+        key: vcpkg-archives-plugin-${{ github.run_id }}
+        restore-keys: vcpkg-archives-plugin-
 
     - name: install deps
       run: |
