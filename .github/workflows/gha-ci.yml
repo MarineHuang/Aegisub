@@ -157,6 +157,10 @@ jobs:
 
     - name: configure
       run: |
+        # Modify aliyun-oss-cpp-sdk CMakeLists.txt
+        Remove-Item -Path vendor\aliyun-oss-cpp-sdk\CMakeLists.txt
+        Copy-Item -Path vendor\CMakeLists.aliyun.oss.cpp.sdk -Destination vendor\aliyun-oss-cpp-sdk\CMakeLists.txt
+        
         bash.exe build/version.sh .
         New-Item -Path build-dir -ItemType directory
         Set-Location build-dir
