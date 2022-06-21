@@ -1,7 +1,10 @@
 cmake_minimum_required(VERSION 3.5)
 
-find_package(curl REQUIRED)
+find_package(CURL REQUIRED)
 find_package(openssl REQUIRED)
+
+message("CURL_LIBRARIES: ${CURL_LIBRARIES}")
+message("OPENSSL_LIBRARIES: ${OPENSSL_LIBRARIES}")
 
 file(GLOB NETWORK_SOURCES 
     ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp
@@ -21,6 +24,7 @@ set(PROJECT_INCLUDE
 )
 
 set(PROJECT_LIBS
+    Crypt32.lib
     ${CURL_LIBRARIES}
     ${OPENSSL_LIBRARIES}
     ${PROJECT_LIBS}
