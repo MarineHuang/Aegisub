@@ -191,7 +191,7 @@ jobs:
         New-Item -Path build-dir\Release\automation -ItemType directory
         Copy-Item -Path automation\autoload,automation\demos,automation\include -Destination build-dir\Release\automation -Recurse
 
-        Copy-Item -Path C:\vcpkg\installed\x64-windows-release\bin\AviSynth.dll -Destination build-dir\Release
+        Copy-Item -Path C:\vcpkg\installed\x64-windows\bin\AviSynth.dll -Destination build-dir\Release
         Copy-Item -Path vendor\ffms2\ffms2-2.23.1-msvc\x64\ffms2.dll -Destination build-dir\Release
         Copy-Item -Path vendor\aegisub9212\csri,vendor\aegisub9212\dictionaries,vendor\aegisub9212\licenses,vendor\aegisub9212\locale,vendor\aegisub9212\AssDraw3.exe,vendor\aegisub9212\AssDraw3.chm,vendor\aegisub9212\DirectShowSource.dll -Destination build-dir\Release -Recurse
 
